@@ -42,6 +42,15 @@ python3 -m pip install -q -r requirements-dev.txt \
 python3 -m pip install -q piper-tts faster-whisper yt-dlp \
   || log "WARN optional provider install failed — cloud providers still work"
 
+# Each voice model is a ~60 MB download, so the environment's setup script
+# normally leaves them in the snapshot. Fetch them only when it did not.
+if [ ! -f en_US-lessac-medium.onnx ]; then
+  log "downloading piper voice models"
+  python3 -m piper.download_voices --data-dir . \
+    en_US-lessac-medium zh_CN-huayan-medium >/dev/null 2>&1 \
+    || log "WARN piper voice download failed - piper_tts stays unusable"
+fi
+
 # `npm install` rather than `ci` so a cached node_modules is reused instead of
 # being deleted and refetched.
 if [ ! -d remotion-composer/node_modules ]; then
