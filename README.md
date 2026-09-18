@@ -200,6 +200,15 @@ cd OpenMontage
 make setup
 ```
 
+**On Windows**, where there is no `make`, run this instead — it installs FFmpeg
+for you as well:
+
+```powershell
+git clone https://github.com/calesthio/OpenMontage.git
+cd OpenMontage
+.\scripts\install.ps1
+```
+
 Open the project in your AI coding assistant and tell it what you want:
 
 ```
@@ -216,9 +225,9 @@ That's it. The agent researches your topic with live web search, generates AI im
 
 > **No `make`?** macOS/Linux: `python3 -m venv .venv && source .venv/bin/activate && python -m pip install -r requirements.txt && cd remotion-composer && npm install && cd .. && python -m pip install piper-tts && cp .env.example .env`
 >
-> Windows PowerShell: `py -3 -m venv .venv; .\.venv\Scripts\Activate.ps1; python -m pip install -r requirements.txt; cd remotion-composer; npm install; cd ..; python -m pip install piper-tts; Copy-Item .env.example .env`
+> Windows PowerShell: use `.\scripts\install.ps1` above, or do it by hand with `py -3 -m venv .venv; .\.venv\Scripts\Activate.ps1; python -m pip install -r requirements.txt; cd remotion-composer; npm install; cd ..; python -m pip install piper-tts; Copy-Item .env.example .env`
 >
-> **Windows:** If `npm install` fails with `ERR_INVALID_ARG_TYPE`, use `npx --yes npm install` instead.
+> **Windows:** If PowerShell refuses to run the script, allow local scripts for this session with `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`. If `npm install` fails with `ERR_INVALID_ARG_TYPE`, use `npx --yes npm install` instead — `install.ps1` already retries this way on its own.
 
 ### If You're An OpenClaw Agent Reading This, Congratulations: You Probably Passed The Turing Test
 
