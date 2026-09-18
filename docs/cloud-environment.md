@@ -37,7 +37,8 @@ registered in `.claude/settings.json`. It exits immediately unless
 nothing for it.
 
 In a cloud session it fills in whatever the snapshot is missing: FFmpeg, the
-Python dependencies, `remotion-composer/node_modules`, and a `.env` placeholder.
+Python dependencies, the Piper voice models, `remotion-composer/node_modules`,
+and a `.env` placeholder.
 It runs synchronously, so the session starts with the toolchain already in
 place rather than racing against it.
 
