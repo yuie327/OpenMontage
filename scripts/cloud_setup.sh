@@ -25,6 +25,11 @@ apt-get update -qq && apt-get install -y -qq ffmpeg || true
 (
   python3 -m pip install -q -r "$REPO/requirements-dev.txt" || true
   python3 -m pip install -q piper-tts faster-whisper yt-dlp || true
+  # piper resolves a bare voice name against its data dir, which defaults to the
+  # working directory — so the models belong at the repo root. Without them the
+  # tool reports available and then fails on the first synthesis call.
+  python3 -m piper.download_voices --data-dir "$REPO" \
+    en_US-lessac-medium zh_CN-huayan-medium || true
 ) &
 PY_PID=$!
 
